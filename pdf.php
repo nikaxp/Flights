@@ -4,6 +4,9 @@ include('includes/airports.php');
 
 $faker = Faker\Factory::create();
 
+use NumberToWords\NumberToWords;
+$numberToWords = new NumberToWords();
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
     if($_POST['departure']!= $_POST['arrival'] && isset($_POST['start']) && isset($_POST['time']) && $_POST['price'] > 0 ){
@@ -67,6 +70,9 @@ function searchName($place, $tab){
 
 $passenger = $faker->name;
 
+$currencyTransformer = $numberToWords->getCurrencyTransformer('pl');
+$pricePl = $currencyTransformer->toWords($price*100, 'PLN');
+
 ?>
 
 <!doctype html>
@@ -110,8 +116,13 @@ $passenger = $faker->name;
             ?>
         <tr>
             <?php
-            echo "<td colspan = 2><h3> Price:  " . $price . " zł </h3></td>";
+            echo "<td><h3> Price:  " . $price . " zł </h3></td>";
             ?> 
+        </tr>
+        <tr>
+            <?php
+            echo "<td colspan = 2>(" . $pricePl . ")</td>";
+            ?>
         </tr>
         <tr>
             <?php

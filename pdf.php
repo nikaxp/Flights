@@ -15,6 +15,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $tzDep = searchTimeZone($dep, $airports);
         $tzArr = searchTimeZone($arr, $airports);
         
+        // znajduje nazwe
+        $airportDep = searchName($dep, $airports);
+        $airportArr = searchName($arr, $airports);
+        
     }
     else echo "Błędnie wpisane dane"; // nie rozdrabniam się na osobne komunikaty dla każdego pola.
 
@@ -45,7 +49,67 @@ $dateOfDep ->setTimezone($tzArr2); // i zmieniam strefe czasowa na tą, gdzie pr
 $formatEnd = $dateOfDep->format("d-m-Y H:i:s");
 
 
+function searchName($place, $tab){
+    
+    $result = false;
+    foreach($tab as $key => $value){
+        
+        if ($value['code'] == $place){
+            $result = $value['name'];
+        }
+    }
+        return $result;
+    
+}
 
 
 
 ?>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ticket</title> 
+</head>
+<body>
+    
+    <table>
+        <tr>
+            <th colspan="2"><h1>NikiLot Airlines</h1></th>
+        </tr>
+        <tr>
+            <th>FROM</th>
+            <th>TO</th>
+        </tr>
+        <tr>
+            <?php
+            echo "<td><h2>" . $airportDep . "</h2>(" . $dep . ")</td><td><h2>" . $airportArr . "</h2>(" . $arr . ")</td>"; 
+            ?>
+        </tr>
+        <tr>
+            <td><b>Departure (local time) </b></td>
+            <td><b>Arrival (local time)</b></td>
+        </tr>
+        <tr>
+        <?php
+            echo "<td><h3>" . $formatStart . "</h3><br>" . $tzDep . "</td><td><h3>" . $formatEnd . "</h3><br>" . $tzArr . "</td>"; 
+            ?>
+        </tr>
+        <tr>
+            <?php 
+            echo "<td colspan = 2><h3> Flight time:  " . $time . " hours.</h3></td>";
+            ?>
+        <tr>
+            <?php
+            echo "<td colspan = 2><h3> Price:  " . $price . " zł </h3></td>";
+            ?> 
+        </tr>
+        
+    </table>
+
+</body>
+</html>

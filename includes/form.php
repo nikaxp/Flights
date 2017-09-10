@@ -8,7 +8,7 @@
     <title>Formularz</title>
 </head>
 <body>
-    <form action ="includes/pdf.php" method = "POST">
+    <form action ="../pdf.php" method = "POST">
         <label> Lotnisko wylotu: <br>
             <select name="departure">
                 <?php

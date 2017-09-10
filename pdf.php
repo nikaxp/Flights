@@ -52,12 +52,12 @@ $dateOfDep ->setTimezone($tzDep2);
 $formatStart = $dateOfDep->format("d-m-Y H:i:s");
 
 $tzArr2 = new DateTimeZone($tzArr);
-$dateOfDep->modify("+" . $time . "hours"); // dodaje czas lotu
-$dateOfDep ->setTimezone($tzArr2); // i zmieniam strefe czasowa na tą, gdzie przylecieliśmy
+$dateOfDep->modify("+" . $time . "hours"); // dodaję czas lotu
+$dateOfDep ->setTimezone($tzArr2); // i zmieniam strefę czasową na taką, która jest w miejscu przylotu
 
 $formatEnd = $dateOfDep->format("d-m-Y H:i:s");
 
-
+// funkcja znajdujaca nazwe lotniska
 function searchName($place, $tab){
     
     $result = false;
@@ -142,5 +142,5 @@ $html = ob_get_contents();
 
 ob_end_clean(); 
 $mpdf->WriteHTML($html);
-$mpdf->Output();
+$mpdf->Output('ticket.pdf','D');
 ?>

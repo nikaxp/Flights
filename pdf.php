@@ -7,6 +7,9 @@ $faker = Faker\Factory::create();
 use NumberToWords\NumberToWords;
 $numberToWords = new NumberToWords();
 
+$mpdf = new mPDF();
+
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
     if($_POST['departure']!= $_POST['arrival'] && isset($_POST['start']) && isset($_POST['time']) && $_POST['price'] > 0 ){
@@ -72,7 +75,7 @@ $passenger = $faker->name;
 
 $currencyTransformer = $numberToWords->getCurrencyTransformer('pl');
 $pricePl = $currencyTransformer->toWords($price*100, 'PLN');
-
+ob_start();
 ?>
 
 <!doctype html>
@@ -134,3 +137,10 @@ $pricePl = $currencyTransformer->toWords($price*100, 'PLN');
 
 </body>
 </html>
+<?php
+$html = ob_get_contents();
+
+ob_end_clean(); 
+$mpdf->WriteHTML($html);
+$mpdf->Output();
+?>

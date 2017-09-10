@@ -24,5 +24,5 @@ include('includes/form.php');
 </body>
 </html>
 <?php
-//var_dump($airports);
+
 ?>

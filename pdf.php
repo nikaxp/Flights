@@ -1,5 +1,8 @@
 <?php
+require "vendor/autoload.php";
 include('includes/airports.php');
+
+$faker = Faker\Factory::create();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     
@@ -62,7 +65,7 @@ function searchName($place, $tab){
     
 }
 
-
+$passenger = $faker->name;
 
 ?>
 
@@ -99,6 +102,8 @@ function searchName($place, $tab){
             echo "<td><h3>" . $formatStart . "</h3><br>" . $tzDep . "</td><td><h3>" . $formatEnd . "</h3><br>" . $tzArr . "</td>"; 
             ?>
         </tr>
+        <tr><td></td> </tr>
+        <tr><td></td> </tr>
         <tr>
             <?php 
             echo "<td colspan = 2><h3> Flight time:  " . $time . " hours.</h3></td>";
@@ -106,6 +111,11 @@ function searchName($place, $tab){
         <tr>
             <?php
             echo "<td colspan = 2><h3> Price:  " . $price . " zł </h3></td>";
+            ?> 
+        </tr>
+        <tr>
+            <?php
+            echo "<td colspan = 2><h2> Passenger:  " . $passenger . " </h2></td>";
             ?> 
         </tr>
         

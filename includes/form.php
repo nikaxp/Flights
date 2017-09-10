@@ -16,7 +16,7 @@
                 foreach($airports as $key => $value){        
                     echo '<option value="' . $value['code'] . '">' . $value['name'] . '</option>';
                 }
-                var_dump($airports);
+
                 ?>                
             </select>
             <br>
@@ -28,7 +28,7 @@
                 foreach($airports as $key => $value){        
                     echo '<option value="' . $value['code'] . '">' . $value['name'] . '</option>';
                 }
-                
+
                 ?> 
                 
             </select>
